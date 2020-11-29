@@ -22,9 +22,7 @@ import javax.ws.rs.core.SecurityContext;
 
 /**
  * JAX-RS resource class that provides operations for authentication.
- *
- * @author cassiomolin
- */
+*/
 @RequestScoped
 @Path("auth")
 public class AuthenticationResource {

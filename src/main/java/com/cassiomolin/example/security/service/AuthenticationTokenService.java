@@ -13,9 +13,7 @@ import java.util.UUID;
 
 /**
  * Service which provides operations for authentication tokens.
- *
- * @author cassiomolin
- */
+*/
 @ApplicationScoped
 public class AuthenticationTokenService {
 

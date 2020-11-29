@@ -13,9 +13,7 @@ import static org.junit.Assert.assertEquals;
 
 /**
  * Tests for the greeting resource class.
- *
- * @author cassiomolin
- */
+*/
 @RunWith(Arquillian.class)
 public class GreetingResourceTest extends ArquillianTest {
 

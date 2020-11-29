@@ -25,9 +25,7 @@ import static io.undertow.servlet.Servlets.listener;
 
 /**
  * Base Arquillian test class.
- *
- * @author cassiomolin
- */
+*/
 public abstract class ArquillianTest {
 
     @ArquillianResource
@@ -67,10 +65,21 @@ public abstract class ArquillianTest {
         return authenticationToken.getToken();
     }
 
-    protected String getTokenForUser() {
+    protected String getTokenForEmp() {
 
         UserCredentials credentials = new UserCredentials();
-        credentials.setUsername("user");
+        credentials.setUsername("emp");
+        credentials.setPassword("password");
+
+        AuthenticationToken authenticationToken = client.target(uri).path("api").path("auth").request()
+                .post(Entity.entity(credentials, MediaType.APPLICATION_JSON), AuthenticationToken.class);
+        return authenticationToken.getToken();
+    }
+    
+    protected String getTokenForCust() {
+
+        UserCredentials credentials = new UserCredentials();
+        credentials.setUsername("cust");
         credentials.setPassword("password");
 
         AuthenticationToken authenticationToken = client.target(uri).path("api").path("auth").request()

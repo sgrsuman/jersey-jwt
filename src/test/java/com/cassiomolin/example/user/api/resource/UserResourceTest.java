@@ -18,9 +18,7 @@ import static org.junit.Assert.*;
 
 /**
  * Tests for the user resource class.
- *
- * @author cassiomolin
- */
+*/
 @RunWith(Arquillian.class)
 public class UserResourceTest extends ArquillianTest {
 
@@ -34,7 +32,7 @@ public class UserResourceTest extends ArquillianTest {
     @Test
     public void getUsersAsAsUser() {
 
-        String authorizationHeader = composeAuthorizationHeader(getTokenForUser());
+        String authorizationHeader = composeAuthorizationHeader(getTokenForEmp());
 
         Response response = client.target(uri).path("api").path("users").request()
                 .header(HttpHeaders.AUTHORIZATION, authorizationHeader).get();
@@ -69,7 +67,7 @@ public class UserResourceTest extends ArquillianTest {
 
         Long userId = 1L;
 
-        String authorizationHeader = composeAuthorizationHeader(getTokenForUser());
+        String authorizationHeader = composeAuthorizationHeader(getTokenForEmp());
 
         Response response = client.target(uri).path("api").path("users").path(userId.toString()).request()
                 .header(HttpHeaders.AUTHORIZATION, authorizationHeader).get();
@@ -105,9 +103,9 @@ public class UserResourceTest extends ArquillianTest {
     }
 
     @Test
-    public void getAuthenticatedUserAsUser() {
+    public void getAuthenticatedUserAsEmp() {
 
-        String authorizationHeader = composeAuthorizationHeader(getTokenForUser());
+        String authorizationHeader = composeAuthorizationHeader(getTokenForEmp());
 
         Response response = client.target(uri).path("api").path("users").path("me").request()
                 .header(HttpHeaders.AUTHORIZATION, authorizationHeader).get();
@@ -115,8 +113,23 @@ public class UserResourceTest extends ArquillianTest {
 
         QueryUserResult user = response.readEntity(QueryUserResult.class);
         assertNotNull(user.getId());
-        assertEquals("user", user.getUsername());
-        assertThat(user.getAuthorities(), containsInAnyOrder(Authority.USER));
+        assertEquals("emp", user.getUsername());
+        assertThat(user.getAuthorities(), containsInAnyOrder(Authority.EMP));
+    }
+    
+    @Test
+    public void getAuthenticatedUserAsCust() {
+
+        String authorizationHeader = composeAuthorizationHeader(getTokenForCust());
+
+        Response response = client.target(uri).path("api").path("users").path("me").request()
+                .header(HttpHeaders.AUTHORIZATION, authorizationHeader).get();
+        assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
+
+        QueryUserResult user = response.readEntity(QueryUserResult.class);
+        assertNotNull(user.getId());
+        assertEquals("cust", user.getUsername());
+        assertThat(user.getAuthorities(), containsInAnyOrder(Authority.CUST));
     }
 
     @Test
@@ -131,6 +144,6 @@ public class UserResourceTest extends ArquillianTest {
         QueryUserResult user = response.readEntity(QueryUserResult.class);
         assertNotNull(user.getId());
         assertEquals("admin", user.getUsername());
-        assertThat(user.getAuthorities(), containsInAnyOrder(Authority.USER, Authority.ADMIN));
+        assertThat(user.getAuthorities(), containsInAnyOrder(Authority.EMP, Authority.ADMIN));
     }
 }

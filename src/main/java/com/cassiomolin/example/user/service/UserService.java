@@ -10,8 +10,6 @@ import java.util.Optional;
 
 /**
  * Service that provides operations for {@link User}s.
- *
- * @author cassiomolin
  */
 @ApplicationScoped
 public class UserService {
@@ -25,8 +23,8 @@ public class UserService {
      * @param identifier
      * @return
      */
-    public User findByUsernameOrEmail(String identifier) {
-        List<User> users = em.createQuery("SELECT u FROM User u WHERE u.username = :identifier OR u.email = :identifier", User.class)
+    public User findByUsername(String identifier) {
+        List<User> users = em.createQuery("SELECT u FROM User u WHERE u.username = :identifier", User.class)
                 .setParameter("identifier", identifier)
                 .setMaxResults(1)
                 .getResultList();
@@ -54,4 +52,11 @@ public class UserService {
     public Optional<User> findById(Long userId) {
         return Optional.ofNullable(em.find(User.class, userId));
     }
+    
+    public void deleteUser(Long identifier) {
+    	em.getTransaction().begin();
+    	em.createQuery("DELETE FROM User u WHERE u.id = :identifier").setParameter("identifier", identifier).executeUpdate();
+    	em.getTransaction().commit();
+    }
+    
 }

@@ -20,9 +20,7 @@ import java.io.IOException;
 
 /**
  * JWT authentication filter.
- *
- * @author cassiomolin
- */
+*/
 @Provider
 @Dependent
 @Priority(Priorities.AUTHENTICATION)
@@ -50,7 +48,7 @@ public class AuthenticationFilter implements ContainerRequestFilter {
     private void handleTokenBasedAuthentication(String authenticationToken, ContainerRequestContext requestContext) {
 
         AuthenticationTokenDetails authenticationTokenDetails = authenticationTokenService.parseToken(authenticationToken);
-        User user = userService.findByUsernameOrEmail(authenticationTokenDetails.getUsername());
+        User user = userService.findByUsername(authenticationTokenDetails.getUsername());
         AuthenticatedUserDetails authenticatedUserDetails = new AuthenticatedUserDetails(user.getUsername(), user.getAuthorities());
 
         boolean isSecure = requestContext.getSecurityContext().isSecure();

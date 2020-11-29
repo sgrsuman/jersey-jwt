@@ -10,9 +10,7 @@ import javax.inject.Inject;
 
 /**
  * Component for validating user credentials.
- *
- * @author cassiomolin
- */
+*/
 @ApplicationScoped
 public class UsernamePasswordValidator {
 
@@ -31,16 +29,11 @@ public class UsernamePasswordValidator {
      */
     public User validateCredentials(String username, String password) {
 
-        User user = userService.findByUsernameOrEmail(username);
+        User user = userService.findByUsername(username);
 
         if (user == null) {
             // User cannot be found with the given username/email
             throw new AuthenticationException("Bad credentials.");
-        }
-
-        if (!user.isActive()) {
-            // User is not active
-            throw new AuthenticationException("The user is inactive.");
         }
 
         if (!passwordEncoder.checkPassword(password, user.getPassword())) {

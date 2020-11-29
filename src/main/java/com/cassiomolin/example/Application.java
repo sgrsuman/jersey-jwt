@@ -18,9 +18,7 @@ import static io.undertow.servlet.Servlets.listener;
 
 /**
  * Application entry point.
- *
- * @author cassiomolin
- */
+*/
 public class Application {
 
     private static Undertow server;

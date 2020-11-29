@@ -14,9 +14,7 @@ import javax.persistence.Persistence;
 
 /**
  * CDI producer for the JPA {@link EntityManager}.
- *
- * @author cassiomolin
- */
+*/
 @ApplicationScoped
 public class EntityManagerProducer {
 

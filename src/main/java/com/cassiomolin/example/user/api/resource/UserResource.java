@@ -17,8 +17,6 @@ import java.util.stream.Collectors;
 
 /**
  * JAX-RS resource class that provides operations for users.
- *
- * @author cassiomolin
  */
 @RequestScoped
 @Path("users")
@@ -71,7 +69,7 @@ public class UserResource {
             return Response.ok(queryUserResult).build();
         }
 
-        User user = userService.findByUsernameOrEmail(principal.getName());
+        User user = userService.findByUsername(principal.getName());
         QueryUserResult queryUserResult = toQueryUserResult(user);
         return Response.ok(queryUserResult).build();
     }
@@ -87,10 +85,8 @@ public class UserResource {
         queryUserResult.setId(user.getId());
         queryUserResult.setFirstName(user.getFirstName());
         queryUserResult.setLastName(user.getLastName());
-        queryUserResult.setEmail(user.getEmail());
         queryUserResult.setUsername(user.getUsername());
-        queryUserResult.setAuthorities(user.getAuthorities());
-        queryUserResult.setActive(user.isActive());
+        //queryUserResult.setAuthorities(user.getAuthorities());
         return queryUserResult;
     }
 }

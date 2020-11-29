@@ -9,8 +9,6 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 /**
  * API model for returning user details.
- *
- * @author cassiomolin
  */
 @JsonInclude(Include.NON_NULL)
 public class QueryUserResult {
@@ -18,10 +16,8 @@ public class QueryUserResult {
     private Long id;
     private String firstName;
     private String lastName;
-    private String email;
     private String username;
     private Set<Authority> authorities;
-    private Boolean active;
 
     public QueryUserResult() {
 
@@ -51,14 +47,6 @@ public class QueryUserResult {
         this.lastName = lastName;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getUsername() {
         return username;
     }
@@ -75,11 +63,4 @@ public class QueryUserResult {
         this.authorities = authorities;
     }
 
-    public Boolean getActive() {
-        return active;
-    }
-
-    public void setActive(Boolean active) {
-        this.active = active;
-    }
 }

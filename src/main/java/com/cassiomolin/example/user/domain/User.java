@@ -3,14 +3,15 @@ package com.cassiomolin.example.user.domain;
 import com.cassiomolin.example.security.domain.Authority;
 
 import javax.persistence.*;
+
+import org.hibernate.annotations.Cascade;
+
 import java.io.Serializable;
 import java.util.Set;
 
 /**
  * Persistence model that represents a user.
- *
- * @author cassiomolin
- */
+*/
 @Entity
 public class User implements Serializable {
 
@@ -25,16 +26,10 @@ public class User implements Serializable {
     private String lastName;
 
     @Column(unique = true, nullable = false)
-    private String email;
-
-    @Column(unique = true, nullable = false)
     private String username;
 
     @Column(nullable = false)
     private String password;
-
-    @Column(nullable = false)
-    private boolean active;
 
     @ElementCollection(targetClass = Authority.class, fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
@@ -65,14 +60,6 @@ public class User implements Serializable {
         this.lastName = lastName;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getUsername() {
         return username;
     }
@@ -87,14 +74,6 @@ public class User implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
     }
 
     public Set<Authority> getAuthorities() {

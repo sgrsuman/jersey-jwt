@@ -62,11 +62,11 @@ To build and run this application, follow these steps:
 
 When the application starts up, the database will be populated with the following users:
 
-ID | Username | Password | Active | Roles
----|--------- |----------|--------|-------------
-1  | admin    | password | true   | ADMIN, USER
-2  | user     | password | true   | USER
-3  | disabled | password | false  | USER
+ID | Username | Password 
+---|--------- |----------
+1  | admin    | password 
+2  | user     | password 
+3  | disabled | password 
 
 ### Quick words on Undertow and uber-jars
 

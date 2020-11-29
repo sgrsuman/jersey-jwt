@@ -7,9 +7,7 @@ import java.security.Principal;
 
 /**
  * {@link SecurityContext} implementation for token-based authentication.
- *
- * @author cassiomolin
- */
+*/
 public class TokenBasedSecurityContext implements SecurityContext {
 
     private AuthenticatedUserDetails authenticatedUserDetails;

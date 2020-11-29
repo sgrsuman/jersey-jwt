@@ -5,9 +5,7 @@ import javax.enterprise.context.ApplicationScoped;
 
 /**
  * Service class that provides operations for greetings.
- *
- * @author cassiomolin
- */
+*/
 @ApplicationScoped
 public class GreetingService {
 

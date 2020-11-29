@@ -17,9 +17,7 @@ import static org.junit.Assert.assertNotNull;
 
 /**
  * Tests for the authentication resource class.
- *
- * @author cassiomolin
- */
+*/
 @RunWith(Arquillian.class)
 public class AuthenticationResourceTest extends ArquillianTest {
 

@@ -8,6 +8,7 @@ import com.cassiomolin.example.security.api.exeptionmapper.AuthenticationTokenRe
 import com.cassiomolin.example.security.api.filter.AuthenticationFilter;
 import com.cassiomolin.example.security.api.filter.AuthorizationFilter;
 import com.cassiomolin.example.security.api.resource.AuthenticationResource;
+import com.cassiomolin.example.user.api.resource.DeleteUser;
 import com.cassiomolin.example.user.api.resource.UserResource;
 import org.glassfish.jersey.server.ResourceConfig;
 
@@ -15,9 +16,7 @@ import javax.ws.rs.ApplicationPath;
 
 /**
  * Jersey configuration class.
- *
- * @author cassiomolin
- */
+*/
 @ApplicationPath("api")
 public class JerseyConfig extends ResourceConfig {
 
@@ -26,7 +25,7 @@ public class JerseyConfig extends ResourceConfig {
         register(AuthenticationResource.class);
         register(GreetingResource.class);
         register(UserResource.class);
-
+        register(DeleteUser.class);
         register(AuthenticationFilter.class);
         register(AuthorizationFilter.class);
 

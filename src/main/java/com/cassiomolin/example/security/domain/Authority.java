@@ -4,9 +4,7 @@ import com.cassiomolin.example.user.domain.User;
 
 /**
  * Represents an authority granted to a {@link User}.
- *
- * @author cassiomolin
- */
+*/
 public enum Authority {
-    ADMIN, USER
+    ADMIN, EMP, CUST
 }

@@ -4,9 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 
 /**
  * Data transfer object that holds details about an API error.
- *
- * @author cassiomolin
- */
+*/
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ApiErrorDetails {
 

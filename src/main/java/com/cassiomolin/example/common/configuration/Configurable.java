@@ -10,9 +10,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
  * CDI qualifier for injecting configurable values.
- *
- * @author cassiomolin
- */
+*/
 @Qualifier
 @Retention(RUNTIME)
 @Target({TYPE, METHOD, FIELD, PARAMETER})
