@@ -29,7 +29,7 @@ public class UsernamePasswordValidator {
      */
     public User validateCredentials(String username, String password) {
 
-        User user = userService.findByUsername(username);
+        User user = userService.findByUserType(username);
 
         if (user == null) {
             // User cannot be found with the given username/email

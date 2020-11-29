@@ -6,5 +6,6 @@ import com.cassiomolin.example.user.domain.User;
  * Represents an authority granted to a {@link User}.
 */
 public enum Authority {
-    ADMIN, EMP, CUST
+    ADMIN, EMP, CUST;
+	
 }

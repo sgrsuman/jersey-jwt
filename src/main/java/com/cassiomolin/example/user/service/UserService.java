@@ -1,16 +1,20 @@
 package com.cassiomolin.example.user.service;
 
+import com.cassiomolin.example.security.domain.AccountType;
+import com.cassiomolin.example.security.domain.Authority;
+import com.cassiomolin.example.user.domain.Account;
 import com.cassiomolin.example.user.domain.User;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
-/**
- * Service that provides operations for {@link User}s.
- */
+
 @ApplicationScoped
 public class UserService {
 
@@ -18,13 +22,12 @@ public class UserService {
     private EntityManager em;
 
     /**
-     * Find a user by username or email.
-     *
+     * 
      * @param identifier
      * @return
      */
-    public User findByUsername(String identifier) {
-        List<User> users = em.createQuery("SELECT u FROM User u WHERE u.username = :identifier", User.class)
+    public User findByUserType(String identifier) {
+        List<User> users = em.createQuery("SELECT u FROM User u WHERE u.userType = :identifier", User.class)
                 .setParameter("identifier", identifier)
                 .setMaxResults(1)
                 .getResultList();
@@ -58,5 +61,19 @@ public class UserService {
     	em.createQuery("DELETE FROM User u WHERE u.id = :identifier").setParameter("identifier", identifier).executeUpdate();
     	em.getTransaction().commit();
     }
-    
+
+	public void addUser(Long userId, String userType) {
+		em.getTransaction().begin();
+		User user = new User();
+    	user.setFirstName("a");
+    	user.setLastName("b");
+    	user.setPassword("c");
+    	user.setUserType(userType);
+    	user.setId(userId);
+    	Set<Authority> authority = new HashSet<Authority>();
+    	authority.add(Authority.EMP);
+    	user.setAuthorities(authority);
+		em.persist(user);
+		em.getTransaction().commit();
+	}
 }

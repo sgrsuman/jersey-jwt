@@ -1,6 +1,8 @@
 package com.cassiomolin.example.user.api.resource;
 
+import com.cassiomolin.example.user.api.model.QueryAccountResult;
 import com.cassiomolin.example.user.api.model.QueryUserResult;
+import com.cassiomolin.example.user.domain.Account;
 import com.cassiomolin.example.user.domain.User;
 import com.cassiomolin.example.user.service.UserService;
 
@@ -30,6 +32,7 @@ public class UserResource {
 
     @Inject
     private UserService userService;
+    
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -54,26 +57,6 @@ public class UserResource {
         return Response.ok(queryUserResult).build();
     }
 
-    @GET
-    @Path("me")
-    @Produces(MediaType.APPLICATION_JSON)
-    @PermitAll
-    public Response getAuthenticatedUser() {
-
-        Principal principal = securityContext.getUserPrincipal();
-
-        if (principal == null) {
-            QueryUserResult queryUserResult = new QueryUserResult();
-            queryUserResult.setUsername("anonymous");
-            queryUserResult.setAuthorities(new HashSet<>());
-            return Response.ok(queryUserResult).build();
-        }
-
-        User user = userService.findByUsername(principal.getName());
-        QueryUserResult queryUserResult = toQueryUserResult(user);
-        return Response.ok(queryUserResult).build();
-    }
-
     /**
      * Maps a {@link User} instance to a {@link QueryUserResult} instance.
      *
@@ -85,8 +68,8 @@ public class UserResource {
         queryUserResult.setId(user.getId());
         queryUserResult.setFirstName(user.getFirstName());
         queryUserResult.setLastName(user.getLastName());
-        queryUserResult.setUsername(user.getUsername());
-        //queryUserResult.setAuthorities(user.getAuthorities());
+        queryUserResult.setUserType(user.getUserType());
+        queryUserResult.setAuthorities(user.getAuthorities());
         return queryUserResult;
     }
 }

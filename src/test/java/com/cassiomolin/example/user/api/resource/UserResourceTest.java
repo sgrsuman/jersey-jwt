@@ -91,18 +91,6 @@ public class UserResourceTest extends ArquillianTest {
     }
 
     @Test
-    public void getAuthenticatedUserAsAnonymous() {
-
-        Response response = client.target(uri).path("api").path("users").path("me").request().get();
-        assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
-
-        QueryUserResult user = response.readEntity(QueryUserResult.class);
-        assertNull(user.getId());
-        assertEquals("anonymous", user.getUsername());
-        assertThat(user.getAuthorities(), is(empty()));
-    }
-
-    @Test
     public void getAuthenticatedUserAsEmp() {
 
         String authorizationHeader = composeAuthorizationHeader(getTokenForEmp());
@@ -113,7 +101,7 @@ public class UserResourceTest extends ArquillianTest {
 
         QueryUserResult user = response.readEntity(QueryUserResult.class);
         assertNotNull(user.getId());
-        assertEquals("emp", user.getUsername());
+        assertEquals("emp", user.getUserType());
         assertThat(user.getAuthorities(), containsInAnyOrder(Authority.EMP));
     }
     
@@ -128,7 +116,7 @@ public class UserResourceTest extends ArquillianTest {
 
         QueryUserResult user = response.readEntity(QueryUserResult.class);
         assertNotNull(user.getId());
-        assertEquals("cust", user.getUsername());
+        assertEquals("cust", user.getUserType());
         assertThat(user.getAuthorities(), containsInAnyOrder(Authority.CUST));
     }
 
@@ -143,7 +131,7 @@ public class UserResourceTest extends ArquillianTest {
 
         QueryUserResult user = response.readEntity(QueryUserResult.class);
         assertNotNull(user.getId());
-        assertEquals("admin", user.getUsername());
+        assertEquals("admin", user.getUserType());
         assertThat(user.getAuthorities(), containsInAnyOrder(Authority.EMP, Authority.ADMIN));
     }
 }

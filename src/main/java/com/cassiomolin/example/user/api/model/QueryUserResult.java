@@ -1,5 +1,6 @@
 package com.cassiomolin.example.user.api.model;
 
+import com.cassiomolin.example.security.domain.AccountType;
 import com.cassiomolin.example.security.domain.Authority;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
@@ -16,7 +17,7 @@ public class QueryUserResult {
     private Long id;
     private String firstName;
     private String lastName;
-    private String username;
+    private String userType;
     private Set<Authority> authorities;
 
     public QueryUserResult() {
@@ -47,14 +48,14 @@ public class QueryUserResult {
         this.lastName = lastName;
     }
 
-    public String getUsername() {
-        return username;
+    public String getUserType() {
+        return userType;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserType(String userType) {
+        this.userType = userType;
     }
-
+    
     public Set<Authority> getAuthorities() {
         return authorities;
     }

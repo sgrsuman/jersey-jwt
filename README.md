@@ -109,27 +109,6 @@ curl -X POST \
 }'
 ```
 
-### Get a public greeting
-
-No authentication is required to perform this operation.
-
-```bash
-curl -X GET \
-  'http://localhost:8080/api/greetings/public' \
-  -H 'Accept: text/plain'
-```
-
-### Get a greeting for the user
-
-Authentication and `USER` role are required to perform this operation.
-
-```bash
-curl -X GET \
-  'http://localhost:8080/api/greetings/protected' \
-  -H 'Accept: text/plain' \
-  -H 'Authorization: Bearer <authentication-token>'
-```
-
 ### Get all users
 
 Authentication and `ADMIN` role are required to perform this operation.

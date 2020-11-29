@@ -17,6 +17,7 @@ public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "id", nullable = false)
     private Long id;
 
     @Column(name = "first_name", nullable = false)
@@ -25,10 +26,10 @@ public class User implements Serializable {
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @Column(unique = true, nullable = false)
-    private String username;
+    @Column(name = "user_type", nullable = false)
+    private String userType;
 
-    @Column(nullable = false)
+    @Column(name = "password", nullable = false)
     private String password;
 
     @ElementCollection(targetClass = Authority.class, fetch = FetchType.EAGER)
@@ -60,12 +61,12 @@ public class User implements Serializable {
         this.lastName = lastName;
     }
 
-    public String getUsername() {
-        return username;
+    public String getUserType() {
+        return userType;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserType(String userType) {
+        this.userType = userType;
     }
 
     public String getPassword() {
@@ -89,11 +90,11 @@ public class User implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return username != null ? username.equals(user.username) : user.username == null;
+        return id != null ? id.equals(user.id) : user.id == null;
     }
 
     @Override
     public int hashCode() {
-        return username != null ? username.hashCode() : 0;
+        return id != null ? id.hashCode() : 0;
     }
 }

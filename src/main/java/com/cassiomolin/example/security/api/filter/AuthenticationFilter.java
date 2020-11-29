@@ -48,8 +48,8 @@ public class AuthenticationFilter implements ContainerRequestFilter {
     private void handleTokenBasedAuthentication(String authenticationToken, ContainerRequestContext requestContext) {
 
         AuthenticationTokenDetails authenticationTokenDetails = authenticationTokenService.parseToken(authenticationToken);
-        User user = userService.findByUsername(authenticationTokenDetails.getUsername());
-        AuthenticatedUserDetails authenticatedUserDetails = new AuthenticatedUserDetails(user.getUsername(), user.getAuthorities());
+        User user = userService.findByUserType(authenticationTokenDetails.getUsername());
+        AuthenticatedUserDetails authenticatedUserDetails = new AuthenticatedUserDetails(user.getUserType().toString(), user.getAuthorities());
 
         boolean isSecure = requestContext.getSecurityContext().isSecure();
         SecurityContext securityContext = new TokenBasedSecurityContext(authenticatedUserDetails, authenticationTokenDetails, isSecure);
