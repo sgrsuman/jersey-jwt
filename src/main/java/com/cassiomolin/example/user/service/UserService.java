@@ -26,8 +26,8 @@ public class UserService {
      * @param identifier
      * @return
      */
-    public User findByUserType(String identifier) {
-        List<User> users = em.createQuery("SELECT u FROM User u WHERE u.userType = :identifier", User.class)
+    public User findByUserName(String identifier) {
+        List<User> users = em.createQuery("SELECT u FROM User u WHERE u.user_name = :identifier", User.class)
                 .setParameter("identifier", identifier)
                 .setMaxResults(1)
                 .getResultList();
@@ -62,13 +62,13 @@ public class UserService {
     	em.getTransaction().commit();
     }
 
-	public void addUser(Long userId, String userType) {
+	public void addUser(Long userId, String userName) {
 		em.getTransaction().begin();
 		User user = new User();
     	user.setFirstName("a");
     	user.setLastName("b");
     	user.setPassword("c");
-    	user.setUserType(userType);
+    	user.setUserName(userName);
     	user.setId(userId);
     	Set<Authority> authority = new HashSet<Authority>();
     	authority.add(Authority.EMP);

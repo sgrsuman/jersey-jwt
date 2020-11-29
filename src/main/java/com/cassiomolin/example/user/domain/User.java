@@ -25,10 +25,10 @@ public class User implements Serializable {
 
     @Column(name = "last_name", nullable = false)
     private String lastName;
-
-    @Column(name = "user_type", nullable = false)
-    private String userType;
-
+    
+    @Column(name = "user_name", nullable = false)
+    private String userName;
+    
     @Column(name = "password", nullable = false)
     private String password;
 
@@ -60,13 +60,13 @@ public class User implements Serializable {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-
-    public String getUserType() {
-        return userType;
+    
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUserType(String userType) {
-        this.userType = userType;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPassword() {

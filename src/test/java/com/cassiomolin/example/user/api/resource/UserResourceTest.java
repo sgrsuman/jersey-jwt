@@ -101,7 +101,7 @@ public class UserResourceTest extends ArquillianTest {
 
         QueryUserResult user = response.readEntity(QueryUserResult.class);
         assertNotNull(user.getId());
-        assertEquals("emp", user.getUserType());
+        assertEquals("emp", user.getUserName());
         assertThat(user.getAuthorities(), containsInAnyOrder(Authority.EMP));
     }
     
@@ -116,7 +116,7 @@ public class UserResourceTest extends ArquillianTest {
 
         QueryUserResult user = response.readEntity(QueryUserResult.class);
         assertNotNull(user.getId());
-        assertEquals("cust", user.getUserType());
+        assertEquals("cust", user.getUserName());
         assertThat(user.getAuthorities(), containsInAnyOrder(Authority.CUST));
     }
 
@@ -131,7 +131,7 @@ public class UserResourceTest extends ArquillianTest {
 
         QueryUserResult user = response.readEntity(QueryUserResult.class);
         assertNotNull(user.getId());
-        assertEquals("admin", user.getUserType());
+        assertEquals("admin", user.getUserName());
         assertThat(user.getAuthorities(), containsInAnyOrder(Authority.EMP, Authority.ADMIN));
     }
 }

@@ -68,7 +68,7 @@ public class UserResource {
         queryUserResult.setId(user.getId());
         queryUserResult.setFirstName(user.getFirstName());
         queryUserResult.setLastName(user.getLastName());
-        queryUserResult.setUserType(user.getUserType());
+        queryUserResult.setUserName(user.getUserName());
         queryUserResult.setAuthorities(user.getAuthorities());
         return queryUserResult;
     }

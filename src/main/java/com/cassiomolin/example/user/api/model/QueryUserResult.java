@@ -17,7 +17,7 @@ public class QueryUserResult {
     private Long id;
     private String firstName;
     private String lastName;
-    private String userType;
+    private String userName;
     private Set<Authority> authorities;
 
     public QueryUserResult() {
@@ -48,12 +48,12 @@ public class QueryUserResult {
         this.lastName = lastName;
     }
 
-    public String getUserType() {
-        return userType;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUserType(String userType) {
-        this.userType = userType;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
     
     public Set<Authority> getAuthorities() {

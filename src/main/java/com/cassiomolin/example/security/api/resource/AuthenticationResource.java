@@ -49,7 +49,7 @@ public class AuthenticationResource {
     public Response authenticate(UserCredentials credentials) {
 
         User user = usernamePasswordValidator.validateCredentials(credentials.getUsername(), credentials.getPassword());
-        String token = authenticationTokenService.issueToken(user.getUserType().toString(), user.getAuthorities());
+        String token = authenticationTokenService.issueToken(user.getUserName(), user.getAuthorities());
         AuthenticationToken authenticationToken = new AuthenticationToken();
         authenticationToken.setToken(token);
         return Response.ok(authenticationToken).build();
