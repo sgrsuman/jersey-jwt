@@ -13,10 +13,11 @@ import java.util.Set;
  * Persistence model that represents a user.
 */
 @Entity
+@Table(name = "user")
 public class User implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    //@GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id", nullable = false)
     private Long id;
 
@@ -26,7 +27,7 @@ public class User implements Serializable {
     @Column(name = "last_name", nullable = false)
     private String lastName;
     
-    @Column(name = "user_name", nullable = false)
+    @Column( nullable = false)
     private String userName;
     
     @Column(name = "password", nullable = false)
@@ -90,11 +91,11 @@ public class User implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return id != null ? id.equals(user.id) : user.id == null;
+        return userName != null ? userName.equals(user.userName) : user.userName == null;
     }
 
     @Override
     public int hashCode() {
-        return id != null ? id.hashCode() : 0;
+        return userName != null ? userName.hashCode() : 0;
     }
 }

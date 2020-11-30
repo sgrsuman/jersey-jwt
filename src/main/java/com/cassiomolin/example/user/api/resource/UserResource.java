@@ -72,4 +72,24 @@ public class UserResource {
         queryUserResult.setAuthorities(user.getAuthorities());
         return queryUserResult;
     }
+    
+    @GET
+    @Path("me")
+    @Produces(MediaType.APPLICATION_JSON)
+    @PermitAll
+    public Response getAuthenticatedUser() {
+
+        Principal principal = securityContext.getUserPrincipal();
+
+        if (principal == null) {
+            QueryUserResult queryUserResult = new QueryUserResult();
+            queryUserResult.setUserName("anonymous");
+            queryUserResult.setAuthorities(new HashSet<>());
+            return Response.ok(queryUserResult).build();
+        }
+
+        User user = userService.findByUserName(principal.getName());
+        QueryUserResult queryUserResult = toQueryUserResult(user);
+        return Response.ok(queryUserResult).build();
+    }
 }

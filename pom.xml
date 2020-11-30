@@ -159,13 +159,6 @@
             <version>${arquillian-undertow-embedded.version}</version>
             <scope>test</scope>
         </dependency>
-        
-   <dependency>
-    <groupId>org.springframework</groupId>
-    <artifactId>spring-tx</artifactId>
-    <version>4.2.6.RELEASE</version>
-</dependency>
-
     </dependencies>
 
     <build>

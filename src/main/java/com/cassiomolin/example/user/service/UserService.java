@@ -4,6 +4,7 @@ import com.cassiomolin.example.security.domain.AccountType;
 import com.cassiomolin.example.security.domain.Authority;
 import com.cassiomolin.example.user.domain.Account;
 import com.cassiomolin.example.user.domain.User;
+import com.cassiomolin.example.user.domain.UserAuthority;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -27,10 +28,7 @@ public class UserService {
      * @return
      */
     public User findByUserName(String identifier) {
-        List<User> users = em.createQuery("SELECT u FROM User u WHERE u.user_name = :identifier", User.class)
-                .setParameter("identifier", identifier)
-                .setMaxResults(1)
-                .getResultList();
+        List<User> users = em.createQuery("SELECT u FROM User u WHERE u.userName = :identifier", User.class).setParameter("identifier", identifier).setMaxResults(1).getResultList();
         if (users.isEmpty()) {
             return null;
         }
@@ -62,6 +60,11 @@ public class UserService {
     	em.getTransaction().commit();
     }
 
+    /**
+     * 
+     * @param userId
+     * @param userName
+     */
 	public void addUser(Long userId, String userName) {
 		em.getTransaction().begin();
 		User user = new User();
@@ -70,9 +73,20 @@ public class UserService {
     	user.setPassword("c");
     	user.setUserName(userName);
     	user.setId(userId);
-    	Set<Authority> authority = new HashSet<Authority>();
-    	authority.add(Authority.EMP);
-    	user.setAuthorities(authority);
+		em.persist(user);
+		em.getTransaction().commit();
+	}
+	
+	/**
+	 * 
+	 * @param userId
+	 */
+	public void addUserAuth(Long userId) {
+		em.getTransaction().begin();
+		UserAuthority user = new UserAuthority();
+		user.setId(userId);
+		user.setUserId(userId);
+    	user.setAuthority(Authority.CUST);
 		em.persist(user);
 		em.getTransaction().commit();
 	}
